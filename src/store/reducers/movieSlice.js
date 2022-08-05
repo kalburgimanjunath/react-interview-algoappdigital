@@ -2,7 +2,20 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   value: 0,
+  likes: 0,
+  movies: [],
+  loading: false,
 };
+// const fetchedUser = () => {
+//   fetch(
+//     'https://api.themoviedb.org/3/movie/upcoming?api_key=f50ad22f53d646b27b4d58e0ab474f3b&language=en-US&page=1'
+//   )
+//     .then((res) => res.json())
+//     .then((result) => {
+//       console.log(result);
+//       setMovies(result.results.json());
+//     });
+// };
 
 export const movieSlice = createSlice({
   name: 'movie',
@@ -13,13 +26,16 @@ export const movieSlice = createSlice({
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      state.value += 1;
+      state.likes += 1;
     },
     decrement: (state) => {
-      state.value -= 1;
+      state.likes -= 1;
     },
     incrementByAmount: (state, action) => {
-      state.value += action.payload;
+      state.likes += action.payload;
+    },
+    loadData: (newstate) => {
+      state.concat(newstate);
     },
   },
 });
